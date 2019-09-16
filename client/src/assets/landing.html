@@ -1,0 +1,78 @@
+<html>
+    <body>
+        <div class='content'>
+            <div class='top-nav'>
+                <h3 class='logo'>Resume Parser</h3>
+                <ul class='top-nav__menu'>
+                    <li>Login</li>
+                    <li>Contact</li>
+                </ul>
+            </div>
+            <div class='content-inner'>
+                <div>
+                    <h1>The easiest and fastest way to parse a resume!</h1>
+                    <a class='button'>Get Started</a>
+                </div>
+                <div class='splash-image'></div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<style>
+    body {
+        font-family: sans-serif;
+        background: #555;
+        color: #FFF;
+        font-size: 24px;
+    }
+    .content {
+        max-width: 1280px;
+        padding: 0 64px;
+        box-sizing: border-box;
+    }
+
+    .top-nav {
+        font-family: monospace;
+        padding-top: 32px;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .top-nav .top-nav__menu {
+        display: flex;
+    }
+
+    .top-nav li {
+        display: block;
+    }
+
+    .top-nav .top-nav__menu * + * {
+        margin-left: 32px;
+    }
+
+    .content-inner {
+        display: grid;
+        grid-gap: 16px;
+        grid-template-columns: 1fr 1fr;
+        height: 100%;
+    }
+
+    .button {
+        padding: 12px 24px;
+        background: #3ad2ad;
+        text-transform: uppercase;
+        border-radius: 2px;
+        font-family: monospace;
+        font-size: 18px;
+        white-space: nowrap;
+    }
+
+    .splash-image {
+        background-image: url('./ufo.png');
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+</style>
