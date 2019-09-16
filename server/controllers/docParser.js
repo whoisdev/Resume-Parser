@@ -29,7 +29,7 @@ let getParsedFileResult = function(filePath){
             }
           });
         }
-        resolve({'keyword' :matchedKeyword, 'keyphrases': matchedkeyphrases})
+        resolve({'keyword': [...matchedKeyword, ...matchedkeyphrases]})
       } catch (err) {
           reject(err);
       }
