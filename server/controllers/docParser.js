@@ -5,9 +5,9 @@ var keywords = require("retext-keywords");
 var toString = require("nlcst-to-string");
 let getParsedText = require("./pdfToText.js");
 
-let getParsedFileResult = function(){
+let getParsedFileResult = function(filePath){
   return new Promise((resolve, reject)=>{
-    getParsedText().then(data => {
+    getParsedText(filePath).then(data => {
       try {
         let matchedKeyword = [];
         let  matchedkeyphrases = [];
@@ -36,3 +36,5 @@ let getParsedFileResult = function(){
     });
   })
 }
+
+export {getParsedFileResult};

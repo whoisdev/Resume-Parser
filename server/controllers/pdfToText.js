@@ -1,9 +1,9 @@
 var pdfUtil = require('pdf-to-text');
-var pdf_path = "./functionalSample.pdf";
 
-function getParsedText(){
+function getParsedText(filePath){
+    filePath = `uploads/${filePath}`
     return new Promise((resolve,reject)=>{
-        pdfUtil.pdfToText(pdf_path, (err,data)=>{
+        pdfUtil.pdfToText(filePath, (err,data)=>{
             if (err) reject(err)
             resolve(data);
         })

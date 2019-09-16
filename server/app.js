@@ -5,6 +5,7 @@ import express from 'express';
 import multer from 'multer';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+import {getParsedFileResult} from './controllers/docParser';
 
 const app = express();
 
@@ -37,13 +38,6 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 
-/**
- * Everything except API request 
- * triggers the SPA(FRONT-END).
- */
-app.get(/.*/,(req,res)=>{
-    res.sendFile(__dirname + '/public/index.html');
-})
 
 /**
  * Upload files to the server.
@@ -52,6 +46,22 @@ app.post('/api/upload', upload.single('resume'), function (req, res) {
     return res.json('Successfully uploaded file.', 200)
 })
 
+app.get('/api/parse', (req,res)=>{
+    let filePath = req.body.resumePath;
+    console.log(filePath);
+    getParsedFileResult(filePath)
+        .then((parsedData)=>{
+            res.json(parsedData, 200);
+        })
+})
+
+/**
+ * Everything except API request 
+ * triggers the SPA(FRONT-END).
+ */
+app.get(/.*/,(req,res)=>{
+    res.sendFile(__dirname + '/public/index.html');
+})
 /**
  * Server Port Defined~
  * TODO: Change this when deploying for production
