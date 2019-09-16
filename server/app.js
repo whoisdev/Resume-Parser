@@ -1,7 +1,7 @@
 /**
  * Load node modules for routing, server and parsing
  */
-const express = require('express');
+import express from 'express';
 const app = express();
 const bodyParser  = require('body-parser');
 const cors = require('cors');
@@ -26,7 +26,7 @@ app.use(cors());
  * Everything except API request 
  * triggers the SPA(FRONT-END).
  */
-app.get(/.*/,function (req,res){
+app.get(/.*/,(req,res)=>{
     res.sendFile(__dirname + '/public/index.html');
 })
 

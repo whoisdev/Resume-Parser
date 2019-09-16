@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "live": "nodemon start.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,5 +16,10 @@
     "http": "0.0.0",
     "nodemon": "^1.19.2",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/register": "^7.6.0"
   }
 }
