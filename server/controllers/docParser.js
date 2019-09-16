@@ -1,28 +1,38 @@
-var vfile = require('to-vfile')
-var retext = require('retext')
-var pos = require('retext-pos')
-var keywords = require('retext-keywords')
-var toString = require('nlcst-to-string')
+var vfile = require("to-vfile");
+var retext = require("retext");
+var pos = require("retext-pos");
+var keywords = require("retext-keywords");
+var toString = require("nlcst-to-string");
+let getParsedText = require("./pdfToText.js");
 
-retext()
-  .use(pos) // Make sure to use `retext-pos` before `retext-keywords`.
-  .use(keywords)
-  .process(vfile.readSync('example.txt'), done)
-
-function done(err, file) {
-  if (err) throw err
-
-  console.log('Keywords:')
-  file.data.keywords.forEach(function(keyword) {
-    console.log(toString(keyword.matches[0].node))
-  })
-
-  console.log()
-  console.log('Key-phrases:')
-  file.data.keyphrases.forEach(function(phrase) {
-    console.log(phrase.matches[0].nodes.map(stringify).join(''))
-    function stringify(value) {
-      return toString(value)
-    }
+let getParsedFileResult = function(){
+  return new Promise((resolve, reject)=>{
+    getParsedText().then(data => {
+      try {
+        let matchedKeyword = [];
+        let  matchedkeyphrases = [];
+        retext()
+          .use(pos) // Make sure to use `retext-pos` before `retext-keywords`.
+          .use(keywords)
+          .process(data, done);
+    
+        function done(err, file) {
+          if (err) throw err;
+          file.data.keywords.forEach(function(keyword) {
+            matchedKeyword.push(toString(keyword.matches[0].node))
+          });
+    
+          file.data.keyphrases.forEach(function(phrase) {
+            matchedkeyphrases.push(phrase.matches[0].nodes.map(stringify).join(""))
+            function stringify(value) {
+              return toString(value);
+            }
+          });
+        }
+        resolve({'keyword' :matchedKeyword, 'keyphrases': matchedkeyphrases})
+      } catch (err) {
+          reject(err);
+      }
+    });
   })
 }
