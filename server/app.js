@@ -30,10 +30,15 @@ app.get(/.*/,(req,res)=>{
     res.sendFile(__dirname + '/public/index.html');
 })
 
-
+/**
+ * Upload files to the server.
+ */
+app.post('/api/upload', function (req, res) {
+    return res.json('Hello world')
+})
 
 /**
- * Server Port Defined
+ * Server Port Defined~
  * TODO: Change this when deploying for production
  */
 app.listen(3000, process.env.IP, () =>{
